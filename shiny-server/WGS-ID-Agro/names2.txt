@@ -1,0 +1,8 @@
+Sinorhizobium	S.
+Agrobacterium	A.
+Candidatus	C.
+Ensifer	E.
+Kaistia	K.
+Liberibacter	L.
+Neorhizobium	N.
+Rhizobium	R.

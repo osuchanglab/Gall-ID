@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <!--- Change the title of the webpage in the <title> tag -->
+    <title>Gall-ID | Genotype-ID: Whole Genome Analysis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="root" >
+	<!-- Le styles, make sure that the Bootstrap_files folder is in the same directory than your homepage -->
+    <link href="Bootstrap_files/bootstrap.css" rel="stylesheet">
+   	<link href="Bootstrap_files/phytophthora-lab.css" rel="stylesheet">
+    <style>
+      /* Sticky footer styles
+      -------------------------------------------------- */
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 95%;
+        height: auto !important;
+        height: 95%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -70px;
+      }
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height: 120px;
+      }
+      #footer {
+        background-color: #f5f5f5;
+      }
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+      #wrap > .container {
+        padding-top: 60px;
+      }
+      .container .credit {
+        margin: 20px 0;
+      }
+      code {
+        font-size: 80%;
+      }
+    </style>
+    <head>
+    <!-- Recalling stylesheets and icons. Once again, make sure that the Bootstrap_files folder is in the same directory than your homepage -->
+  	<link rel="stylesheet" type="text/css" href="shared/shiny.css"/>
+    <link href="Bootstrap_files/bootstrap-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="shared/shiny.css"/> 
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="img/customIcon.png">
+  </head>
+
+<body>
+<div id="wrap">
+	<div class="navbar navbar navbar-fixed-top">
+		<div class="navbar-inner">
+		<div class="container">
+			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<!-- Names of the links are between the <a></a> tags. -->
+			<a class="brand" href="./index.html">Gall-ID</a>
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+				<li class="./index.html"><a href="./index.html">Home</a></li>
+                <li><a href="./genome-id-agro.html">Agro-type</a></li>
+                <li><a href="./genome-id-rhodo.html">Rhodo-type</a></li>
+                <li><a href="./wgs-id.html">Whole Genome Analysis</a></li>				
+				<li><a href="./vir-finder.html">Vir-Search</a></li>
+				<li><a href="./about.html">About</a></li>            </ul>
+			</div>
+		</div>
+		</div>
+</div>
+    
+<div class="container">
+		<!-- IMPORTANT: The following division contains the Shiny-Server instance that you installed according to the shiny server manual, point the hyperlinks
+		here!. -->
+		<h1><img src="img/genoid.png" class="img-circle" style="border:8px solid #0088CC ; width:80px " >Genotype-ID</h1>
+		<p>Choose a tab to select the type of data and analysis.</p>
+	<!-- Tabs and Dropdowns -->
+		<ul class="nav nav-tabs">
+			<li><a href="./genome-id-agro.html"><em>Agrobacterium</em> MLSA data</a></li>
+			<li><a href="./genome-id-rhodo.html"><em>Rhodococcus</em> MLSA data</a></li>
+			<li class="active"><a href="./wgs-id.html">Whole Genome Sequence data</a></li>
+		</ul>
+		<h2><em>Agrobacterium</em> and <em>Rhodococcus</em> Whole Genome ID</h2>
+		<p>As an alternative to MLSA data, we are also making available scripts and data for whole genome analysis of <em>Agrobacterium</em> and <em>Rhodococcus</em> isolates. Due to the large time and computational requirements, this analysis must be run on the command line of your own computer. The following instructions describe the pipeline and process for generating a core genome phylogenetic tree from whole genome sequencing data. The instructions are written for the Rhodococcus dataset, however analysis of Agrobacterium works the same way.</p>
+		<h3>Instructions</h3>
+		<p>This pipeline relies on paired end Illumina sequencing reads, however pileup files can be generated from other sequencing data using SMALT, which is not described here.<br>Begin by installing the following software programs and make sure the executables are in your command line path. If you wish to remove sites resulting from recombination (which can skew phylogenetic analyses) before generating a phylogeny, also install the Gubbins program.</p>
+		<b>Required Software</b>
+		<p>
+		<a href="http://www.sanger.ac.uk/resources/software/smalt/" target="_blank">SMALT</a><br>
+		<a href="ftp://ftp.sanger.ac.uk/pub/resources/software/ssaha2/pileup.tgz">SSAHA2 pileup</a><br>
+		<a href="http://sco.h-its.org/exelixis/web/software/raxml/index.html" target="_blank">RAxML</a><br>
+		<a href="https://www.perl.org/" target="_blank">Perl</a><font color="gray"> -Installed by default on Mac and most Linux distributions</font><br>
+		<a href="http://git-scm.com/" target="_blank">Git</a><br>
+		<b>Optional:</b><br>
+		<a href="http://sanger-pathogens.github.io/gubbins/" target="_blank">Gubbins</a><font color="gray"> -If compiling from source, first install the modified version of FastML <a href="https://github.com/sanger-pathogens/fastml" target="_blank">here</a></font>
+		</p>
+		<p>Next, download the core genome pipeline scripts and a SMALT index file and pre-computed pileup files for either Agrobacterium or Rhodococcus depending on your sequenced isolates.</p>
+		<h3>Pipeline scripts</h3>
+		<p>Pipeline scripts for core genome analysis: <a href="https://github.com/osuchanglab/core_genome_pipeline" target="_blank">Download</a></p>
+		<h3>Agrobacterium</h3>
+		<p><em>Agrobacterium tumefaciens</em> strain C58 SMALT Index files: <a href="files/Agrobacterium_C58_smalt_index.tar.gz">Download</a><br><font color="gray">Note: This index was generated for NCBI Refseq assembly GCF_000XXXXX.1<sup>[<a href="http://www.ncbi.nlm.nih.gov/assembly/GCF_000XXXXX.1/">1</a>]</sup> using SMALT v0.7.5, with a hash length of 13 and a word space of 2 ( -k 13 -s 2).</font></p>
+		SMALT Pileup files for ## Agrobacterium isolates ( X GB): <a href="files/Rhodococcus_A44a_smalt_pileups.tar.gz">Download</a>
+		<h3>Rhodococcus</h3>
+		<p><em>Rhodocccus fascians</em> strain A44a SMALT Index files: <a href="files/Rhodococcus_A44a_smalt_index.tar.gz">Download</a><br>
+		<font color="gray">Note: This index was generated for NCBI Refseq assembly GCF_000760735.1<sup>[<a href="http://www.ncbi.nlm.nih.gov/assembly/GCF_000760735.1/">1</a>]</sup> using SMALT v0.7.5, with a hash length of 13 and a word space of 2 ( -k 13 -s 2).</font></p>
+		SMALT Pileup files for 17 Rhodococcus isolates ( 700 MB): <a href="files/Rhodococcus_A44a_smalt_pileups.tar.gz">Download</a>
+		<h3>Generating a 95% core alignment</h3>
+		<p>First, download the pipeline scripts from GitHub into its own folder using the following command:<br>
+		<pre>
+	git clone https://github.com/osuchanglab/core_genome_pipeline.git Rhodococcus_analysis
+		</pre>
+		Unzip the downloaded SMALT index and pre-compiled pileup files into the same folder:<br>
+		<pre>
+	tar xvzf Rhodococcus_A44a_smalt_index.tar.gz -C ./Rhodococcus_analysis/index
+	tar xvzf Rhodococcus_A44a_smalt_pileups.tar.gz -C ./Rhodococcus_analysis/pileup
+		</pre>
+		Copy your Illumina paired-end read files in fastq format into the analysis folder:
+		<pre>
+	cp my_isolate.1.fastq ./Rhodococcus_analysis/reads/
+	cp my_isolate.2.fastq ./Rhodococcus_analysis/reads/
+		</pre>
+		You can add sequenced isolates into the folder, just make sure that each dataset is consistently named (ie a dataset named datasetname has the files datasetname.1.fastq and datasetname.2.fastq for forward and reverse reads, respectively).<br><br>
+		Generate SMALT pileup files for each dataset using the downloaded index:<br>
+		<pre>
+	cd ./Rhodococcus_analysis
+	./generate_pileup.sh
+		</pre>
+		The script will ask for the location of the ssaha_pileup pipeline folder as well as the estimated insert size for each genome.
+		Generated pileup files will be placed in the pileup folder and named with the format 'datasetname.pileup'.<br><br>
+		Compile all of the pileup files into a 95% shared core alignment using the following script:
+		<pre>
+	./generate_core_alignment.sh
+	</pre>
+		This creates a file called './core_alignment.fasta' containing the 95% shared core alignment in CLUSTAL format.
+		</p>
+		<h3>Optional: Remove recombinant sites</h3>
+		<p>If you want to remove sites putatively resulting from recombination events from your alignment, the program Gubbins can be used with the following script:
+		<pre>
+	./remove_recombination.sh
+		</pre>
+		This will produce a SNP alignment file containing all nonrecombinant polymorphic sites called './core_alignment_filtered_SNPs.fasta'. It also produces a pdf file (core_alignment.recombinant_snps.pdf) detailing the identified recombinant sites.
+		</p>
+		<h3>Generate a phylogeny</h3>
+		<p>To generate a maximum likelihood phylogeny using RAxML, the following script can be used:
+		<pre class="pre-scrollable">
+	./generate_phylogeny.sh
+		</pre>
+		If you removed recombinant sites in the previous step, the script will use the output of Gubbins (core_alignment_filtered_SNPs.fasta) instead of the full core alignment (core_alignment.fasta).
+		</p>
+		<h3>Citations</h3>
+		<p>If you wish to publish output from this pipeline, please cite the following papers and programs:<br><br>
+		
+		Ning Z, Cox AJ and Mullikin JC. SSAHA: a fast search method for large DNA databases. 2001. Genome research (11) 10:1725-9. PUBMED: 11591649; PMC: 311141; DOI: 10.1101/gr.194201<br><br>
+		Hannes Ponstingl. SMALT. Welcome Trust Sanger Institute. <a href="http://smalt.sourceforge.net">http://smalt.sourceforge.net</a><br><br>
+		A. Stamatakis: "RAxML Version 8: A tool for Phylogenetic Analysis and Post-Analysis of Large Phylogenies". In Bioinformatics, 2014, <a href="http://bioinformatics.oxfordjournals.org/content/early/2014/01/21/bioinformatics.btu033.abstract?keytype=ref&ijkey=VTEqgUJYCDcf0kP">open access</a>.<br><br>
+Croucher N. J., Page A. J., Connor T. R., Delaney A. J., Keane J. A., Bentley S. D., Parkhill J., Harris S.R. "Rapid phylogenetic analysis of large samples of recombinant bacterial whole genome sequences using Gubbins". doi:10.1093/nar/gku1196, Nucleic Acids Research, 2014.<br>
+
+		</p>	
+		<hr>
+		<!--<iframe style="border:0;width:100%; height:1800px" name="shinyid_frame" src="http://localhost:3838/www/WGS-ID-Agro/"></iframe> -->
+		</div>
+		<div id="push"></div>
+</div>
+<div id="footer">
+	<div class="container">
+		<br>
+		<p>Add content here</p>
+	</div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="Bootstrap_files/jquery.js"></script>
+    <script src="Bootstrap_files/bootstrap-transition.js"></script>
+    <script src="Bootstrap_files/bootstrap-alert.js"></script>
+    <script src="Bootstrap_files/bootstrap-modal.js"></script>
+    <script src="Bootstrap_files/bootstrap-dropdown.js"></script>
+    <script src="Bootstrap_files/bootstrap-scrollspy.js"></script>
+    <script src="Bootstrap_files/bootstrap-tab.js"></script>
+    <script src="Bootstrap_files/bootstrap-tooltip.js"></script>
+    <script src="Bootstrap_files/bootstrap-popover.js"></script>
+    <script src="Bootstrap_files/bootstrap-button.js"></script>
+    <script src="Bootstrap_files/bootstrap-collapse.js"></script>
+    <script src="Bootstrap_files/bootstrap-carousel.js"></script>
+    <script src="Bootstrap_files/bootstrap-typeahead.js"></script>
+    <script src="Bootstrap_files/jquery.js" type="text/javascript"></script>
+    <script src="Bootstrap_files/shiny.js" type="text/javascript"></script>
+<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+<script>if (typeof(Shiny) != "undefined") {
+  Shiny.createSocket = function() {return new SockJS(location.pathname + "__sockjs__",null,{});};
+  Shiny.oncustommessage = function(message) {
+    if (typeof message === "string") alert(message);
+    if (message.alert) alert(message.alert);
+    if (message.console && console.log) console.log(message.console);
+  };
+}</script>
+
+
+</body>
+	</html>

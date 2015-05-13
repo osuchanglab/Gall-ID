@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <!--- Change the title of the webpage in the <title> tag -->
+    <title>Gall-ID | Whole Genome Analysis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="root" >
+	<!-- Le styles, make sure that the Bootstrap_files folder is in the same directory than your homepage -->
+    <link href="Bootstrap_files/bootstrap.css" rel="stylesheet">
+   	<link href="Bootstrap_files/phytophthora-lab.css" rel="stylesheet">
+    <style>
+      /* Sticky footer styles
+      -------------------------------------------------- */
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 95%;
+        height: auto !important;
+        height: 95%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -70px;
+      }
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height: 120px;
+      }
+      #footer {
+        background-color: #f5f5f5;
+      }
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+      #wrap > .container {
+        padding-top: 60px;
+      }
+      .container .credit {
+        margin: 20px 0;
+      }
+      code {
+        font-size: 80%;
+      }
+    </style>
+    <head>
+    <!-- Recalling stylesheets and icons. Once again, make sure that the Bootstrap_files folder is in the same directory than your homepage -->
+  	<link rel="stylesheet" type="text/css" href="shared/shiny.css"/>
+    <link href="Bootstrap_files/bootstrap-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="shared/shiny.css"/> 
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="img/customIcon.png">
+  </head>
+
+<body>
+<div id="wrap">
+	<div class="navbar navbar navbar-fixed-top">
+		<div class="navbar-inner">
+		<div class="container">
+			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<!-- Names of the links are between the <a></a> tags. -->
+			<a class="brand" href="./index.html">Gall-ID</a>
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+				<li class="./index.html"><a href="./index.html">Home</a></li>
+                <li><a href="./genome-id-agro.html">Agro-type</a></li>
+                <li><a href="./genome-id-rhodo.html">Rhodo-type</a></li>
+                <li><a href="./wgs-id.html">Whole Genome Analysis</a></li>				
+				<li><a href="./vir-finder.html">Vir-Search</a></li>
+				<li><a href="./about.html">About</a></li>            </ul>
+			</div>
+		</div>
+		</div>
+	</div>
+	<div class="container">
+		<form name="srst" class="form-horizontal" id="srst" method="post" action="/cgi-bin/srst.cgi" ENCTYPE="multipart/form-data">
+		<h1><img src="img/genoid.png" class="img-circle" style="border:8px solid #0088CC ; width:80px " >Vir-Search</h1>
+		<p>Search for virulence genes in whole genome sequencing read data.</p>
+		<h2><em>Agrobacterium</em> and <em>Rhodococcus</em> Virulence Gene Search</h2>
+		<p>Select your organism of interest, whether you have paired- or single-end reads, and drop your sequencing read files onto the target. Your read files will be uploaded and then analyzed using Short Read Sequence Typing (SRST2, ref) to identify known virulence genes.</p>
+		</p>	
+		<hr>
+		<div class="container" span="span6" style="padding: 20px; border-radius: 20px; width: 600px; border: 1px solid #D3D3D3;">
+    		
+			<div class="control-group">
+				<label class="control-label" for="organism">Organism</label>
+				<div class="controls">
+					<div class="btn-group"  data-input="organism" data-toggle="buttons-radio" >
+      					<button class="btn btn-medium" data-toggle="button" type="button" value="Agrobacterium"><em>Agrobacterium</em></button>
+      					<button class="btn btn-medium" data-toggle="button" type="button" value="Rhodococcus"><em>Rhodococcus</em></button>
+					</div>
+   	  				<input type="hidden" name="organism" value="Agrobacterium" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for "read_one">Forward/Single Read File</label>
+				<div class="controls">
+					<input type="file" class="filestyle" id="read_one" data-buttonBefore="true" data-input="true" data-buttonName="btn" data-buttonText="Select File" name="read_one">
+				</div>
+			</div>	
+			<div class="control-group">
+				<label class="control-label" for="read_two">Reverse Read File <font color="gray">(optional)</font></label> 
+				<div class="controls">
+					<input type="file" class="filestyle" id="read_two" data-buttonBefore="true" data-input="true" data-buttonName="btn" data-buttonText="Select File" name="read_two">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="min_cov">Minimum Gene Coverage</label>
+				<div class="controls">
+					<div class="input-append">	
+						<input type="number" min="0" max="100" value="90" class="input-mini" name="min_cov" id="min_cov">
+						<span class="add-on">%</span>
+					</div>	
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="max_divergence">Maximum Divergence</label>
+				<div class="controls">
+					<div class="input-append">
+						<input type="number" class="input-mini" min="0" max="100" value="10" name="max_divergence" id="max_divergence">
+						<span class="add-on">%</span>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" type="text" for="jobname">Job Name</label>
+				<div class="controls">
+					<input type="text" name="jobname" id="jobname">
+				</div>
+			</div>
+			<div class="control-group">
+				<label type="text" class="control-label" for="email">Email</label>
+				<div class="controls">
+					<input type="email" name="email" placeholder="email@domain.com" id="email">
+				</div>
+			</div>
+			Enter your email to have results sent to you upon completion. Analysis typically takes 10-20 minutes. Please do not submit more than one job at a time. Abuse of this service will result in access becoming limited.
+
+			<br><br><input type="submit" id="submit" name="submit_form" class="btn">
+		</div>
+	</form>
+	</div>
+</div>
+		<div id="push"></div>
+</div>
+<div id="footer">
+	<div class="container">
+		<br>
+		<p>Add content here</p>
+	</div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="Bootstrap_files/jquery.js"></script>
+    <script src="Bootstrap_files/bootstrap-transition.js"></script>
+    <script src="Bootstrap_files/bootstrap-alert.js"></script>
+    <script src="Bootstrap_files/bootstrap-modal.js"></script>
+    <script src="Bootstrap_files/bootstrap-dropdown.js"></script>
+    <script src="Bootstrap_files/bootstrap-scrollspy.js"></script>
+    <script src="Bootstrap_files/bootstrap-tab.js"></script>
+    <script src="Bootstrap_files/bootstrap-tooltip.js"></script>
+    <script src="Bootstrap_files/bootstrap-popover.js"></script>
+    <script src="Bootstrap_files/bootstrap-button.js"></script>
+    <script src="Bootstrap_files/bootstrap-collapse.js"></script>
+    <script src="Bootstrap_files/bootstrap-carousel.js"></script>
+    <script src="Bootstrap_files/bootstrap-typeahead.js"></script>
+	<script src="Bootstrap_files/jquery.js" type="text/javascript"></script>
+	<script src="Bootstrap_files/bootstrap-filestyle.min.js" type="text/javascript"></script> 
+	<script src="Bootstrap_files/jquery.validate.js" type="text/javascript"></script>
+	<script src="Bootstrap_files/shiny.js" type="text/javascript"></script>
+<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+
+<script>
+//Set up organism buttons as radio input
+jQuery(function($) {
+$('.btn-group[data-input]').each(function() {
+	var hidden = $('[name="' + $(this).data('input') + '"]');
+	$(this).on('click', '.btn', function() {
+		hidden.val($(this).val());
+	}).find('.btn').each(function() {
+		$(this).toggleClass('active', $(this).val() == hidden.val())
+	});
+});
+
+});
+</script>
+
+<script>
+// Using validation to check for the presence of an input
+$('#srst').validate(
+ {
+  rules: {
+    read_one: {
+      required: true
+    },
+    email: {
+      required: true,
+      email: true
+    },
+    jobname: {
+      required: true
+    },
+  },
+  highlight: function(element) {
+    $(element).closest('.control-group').removeClass('success').addClass('error');
+  },
+  success: function(element) {
+    element
+    .closest('.control-group').removeClass('error');
+  }
+ });
+</script>
+
+<script>
+
+if (typeof(Shiny) != "undefined") {
+  Shiny.createSocket = function() {return new SockJS(location.pathname + "__sockjs__",null,{});};
+  Shiny.oncustommessage = function(message) {
+    if (typeof message === "string") alert(message);
+    if (message.alert) alert(message.alert);
+    if (message.console && console.log) console.log(message.console);
+  };
+}</script>
+
+
+</body>
+	</html>
